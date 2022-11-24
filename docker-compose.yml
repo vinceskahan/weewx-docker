@@ -1,49 +1,13 @@
-# 
-# #------------------------------------
-# #
-# # this is the pihole example
-# #  - port 80 changed
-# #  - timezone
-# #  - volume locations
-# #  - password set
-# 
-# version: "3"
-# 
-# services:
-#   pihole:
-#     container_name: pihole
-#     image: pihole/pihole:v5.6
-#     ports:
-#       - "53:53/tcp"
-#       - "53:53/udp"
-#       - "67:67/udp"
-#       - "8000:80/tcp"
-#       - "443:443/tcp"
-#     volumes:
-#       - '/mnt/pihole/etc-pihole/:/etc/pihole/'
-#       - '/mnt/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
-#     environment:
-#       WEBPASSWORD: admin
-#       DNS1: 127.0.0.1
-#       DNS2: 8.8.8.8
-#       TZ: America/Los_Angeles
-#     restart: unless-stopped
-# 
-# #------------------------------------
-#   mosquitto:
-#     restart: unless-stopped
-#     image: eclipse-mosquitto:2.0.15
-#     hostname: mosquitto
-#     container_name: mosquitto
-#     expose:
-#       - "1883"
-#       - "9001"
-#     ports:
-#       - "1883:1883"
-#       - "9001:9001"
-#     volumes:
-#       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-# 
+#-----------------------------------
+# start up a pair of containers
+# with a shared public_html
+#
+# the commented out line for weewx.conf
+# shows how to mount a local config file
+# rather than using the built-in one
+#
+# this uses a built image for weewx
+# (see the Dockerfile for how to build)
 #-----------------------------------
   weewx:
     image: weewx/sim:4.9.1
