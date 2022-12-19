@@ -9,21 +9,21 @@
 # this uses a built image for weewx
 # (see the Dockerfile for how to build)
 #-----------------------------------
-  weewx:
-    image: weewx/sim:4.9.1
-    container_name: weewx
+ weewx:
+    image: weealpine:latest
+    container_name: weealpine
     restart: unless-stopped
     volumes:
-      - /mnt/weewx-sim/html:/home/weewx/public_html
-      - /mnt/weewx-sim/archive:/home/weewx/archive
-      - /mnt/weewx-sim/ssh:/root/.ssh
-      - /mnt/weewx-sim/logs:/var/log
-        ###- ${PWD}/weewx-sim/configs/weewx.conf:/home/weewx/weewx.conf
-  nginx:
+      - /mnt/weewx-alpine/html:/home/weewx/public_html
+      - /mnt/weewx-alpine/archive:/home/weewx/archive
+      - /mnt/weewx-alpine/ssh:/root/.ssh
+      - /mnt/weewx-alpine/logs:/var/log
+        ###- ${PWD}/weewx-alpine/configs/weewx.conf:/home/weewx/weewx.conf
+nginx:
     image: nginx:1.18.0-alpine
-    container_name: nginx
+    container_name: nginxalpine
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8444:80"
     volumes:
-      - /mnt/weewx-sim/html:/usr/share/nginx/html/weewx
+      - /mnt/weewx-alpine/html:/usr/share/nginx/html/weewx
