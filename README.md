@@ -1,30 +1,11 @@
 
 ## Run weewx under Docker
 
-This repo provides a Dockerfile for building weewx in simulator mode plus the Belchertown skin.
+This repo provides a Dockerfile for building weewx in simulator mode plus the Belchertown skin with some other items installed in some cases. See the Dockerfile on the appropriate branch for details.
 
-The docker-compose.yml file will bring up a matching nginx container and listen on the normal web port 80.
+The docker-compose.yml file will bring up a matching nginx container and listen on a port mapped to the Docker host.  See the docker-compose.yml file for details.
 
-### To build
+### Why is this branch empty
 
-docker build -t weewx/sim:4.9.1 .
-
-### To run
-
-docker-compose up -d
-
-### To open a shell into the weewx container
-
-docker run --rm -it weewx/sim:4.9.1 bash
-
-### To view logs
-
-docker-compose logs -f weewx
-
-### To view the web
-
-open http://hostname/weewx/ for the default skin
-
-open http://hostname/weewx/belchertown/ for Belchertown
-
+I've refactored to put os-specific implementations on their own branch.  Set yourself to the appropriate branch to poke around a bit.
 
