@@ -21,15 +21,21 @@
 #    py3-paho-mqtt for mqtt extension
 #    rtl-sdr and rtl_433 for interceptor driver
 #
+#
+# note this sets the timezone to America/Los_Angeles in 'two' places
+# before pip3 installs anything...
+#
 #---
 
 FROM alpine:3.17.0
+ENV TZ=America/Los_Angeles
 COPY logging.additions /tmp/logging.additions
-RUN apk add python3 py3-configobj py3-pyserial py3-usb py3-pillow py3-cheetah py3-pip \
+RUN apk add tzdata python3 py3-configobj py3-pyserial py3-usb py3-pillow py3-cheetah py3-pip \
             py3-paho-mqtt rtl-sdr rtl_433 \
+  && cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
   && pip3 install pyephem \
      && mkdir -p /tmp/weewx \
-     && wget http://www.weewx.com/downloads/weewx-4.9.1.tar.gz -O /tmp/weewx/weewx.tgz \
+     && wget https://www.weewx.com/downloads/released_versions/weewx-4.9.1.tar.gz -O /tmp/weewx/weewx.tgz \
      && cd /tmp/weewx \
         && tar zxvf weewx.tgz \
             && cd weewx-4.9.1 \
