@@ -46,6 +46,8 @@ RUN apk add tzdata python3 py3-configobj py3-pyserial py3-usb py3-pillow py3-che
         \
         && cat /tmp/logging.additions >> /home/weewx/weewx.conf \
         && sed -i -e s:My\ Little\ Town,\ Oregon:My\ Test\ Location,\USA: /home/weewx/weewx.conf \
+        && sed -i -e s:latitude\ =\ 0.00:latitude\ =\ 47.31: /home/weewx/weewx.conf \
+        && sed -i -e s:longitude\ =\ 0.00:longitude\ =\ -122.36: /home/weewx/weewx.conf \
         && sed -i -e s:debug\ =\ 0:debug\ =\ 1: /home/weewx/weewx.conf \
         && sed -i -e s:weewx.engine.StdPrint,\ :: /home/weewx/weewx.conf \
         \
