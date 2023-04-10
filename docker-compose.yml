@@ -1,0 +1,24 @@
+#
+# sudo mkdir -p /mnt/testing-archive
+# sudo mkdir -p /mnt/testing-html
+# sudo chown -R 999:999 /mnt/testing-archive
+# sudo chown -R 999:999 /mnt/testing-html
+#
+
+weewx:
+    image: test:latest
+    container_name: testing
+    restart: unless-stopped
+    volumes:
+      - /mnt/testing-archive:/home/weewx/weewx-data/archive
+      - /mnt/testing-html:/home/weewx/weewx-data/public_html
+
+nginx:
+    image: nginx:1.18.0-alpine
+    container_name: nginxtesting
+    restart: unless-stopped
+    ports:
+      - "8444:80"
+    volumes:
+      - /mnt/testing-html:/usr/share/nginx/html
+
